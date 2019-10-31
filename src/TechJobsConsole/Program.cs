@@ -27,7 +27,6 @@ namespace TechJobsConsole
             Console.WriteLine("Welcome to LaunchCode's TechJobs App!");
 
             // Allow user to search/list until they manually quit with ctrl+c
-            //KAYE: While what is true??!
             while (true)
             {
 
@@ -66,7 +65,8 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -137,7 +137,7 @@ namespace TechJobsConsole
         {
             if (someJobs.Count == 0)
             {
-                Console.WriteLine("There are no results with your query.")
+                Console.WriteLine("There are no results with your query.");
             }
 
             else

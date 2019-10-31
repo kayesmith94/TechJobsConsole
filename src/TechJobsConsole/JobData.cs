@@ -43,13 +43,17 @@ namespace TechJobsConsole
             // load data, if not already loaded
             LoadData();
 
+            //virgin list for returning queried data
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
             foreach (Dictionary<string, string> row in AllJobs)
+                //for every job (which is a dictionary called row)...
             {
                 string aValue = row[column];
+                string aValueUpper = aValue.ToUpper();
+                //avalue is the value at that column-key
 
-                if (aValue.Contains(value))
+                if (aValueUpper.Contains(value.ToUpper()))
                 {
                     jobs.Add(row);
                 }
@@ -139,38 +143,34 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
-    }
-
-
-    /*
-    // TODO: [those inputs and output aren't set]
-    public static List<Dictionary<string, string>> FindByValue(string column, string value)
-    {
-        //will search for a string within each of the columns
-        //will not contain duplicate jobs [ if a listing has position type 
-        //   "Web - Front End" and name "Front end web dev" then searching for "web" 
-        //   should not include the listing twice.]
-        //As with PrintJobs, you should write your code in a way that if a new column is 
-        //   added to the data, your code will automatically search the new column as well.
-        //You should not write code that calls FindByColumnAndValue once for each column. Rather, utilize loops and collection methods as you did above.
-        //You should, on the other hand, read and understand FindByColumnAndValue, since your code will look similar in some ways.
-        //You'll need to call FindByValue from somewhere in Main. We'll leave it up to you to find where. You might have noticed that when you try to search all columns using the app, a message is printed, so that is a good clue to help you find where to place this new method call.
-
-        LoadData();
-
-        List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
-
-        foreach (Dictionary<string, string> row in AllJobs)
+        public static List<Dictionary<string, string>> FindByValue(string value)
         {
-            string aValue = row[column];
+            // load data, if not already loaded
+            LoadData();
 
-            if (aValue.Contains(value))
+            //virgin list for returning queried data
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            //dictionary with uppercase values
+            Dictionary<string, string> upperRow = new Dictionary<string, string>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            //for every job (which is a dictionary called row)...
             {
-                jobs.Add(row);
-            }
-        }
+                //for every value in that job...
+                foreach (KeyValuePair<string,string> keyval in row)
+                {
+                    upperRow.Add(keyval.Key, keyval.Value.ToUpper());
+                }
 
-        return jobs;
+                //if the value is in the job row values and the job is not already in the list
+                if ((upperRow.ContainsValue(value.ToUpper())) && (!(jobs.Contains(row))))
+                {
+                    jobs.Add(row);
+                }
+            }
+
+            return jobs;
+        }
     }
-    */
 }
