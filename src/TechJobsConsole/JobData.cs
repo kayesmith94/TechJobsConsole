@@ -86,6 +86,7 @@ namespace TechJobsConsole
 
             string[] headers = rows[0];
             rows.Remove(headers);
+            //KAYE: Now it's just list of raw data in a list without the headers
 
             // Parse each row array into a more friendly Dictionary
             foreach (string[] row in rows)
@@ -139,4 +140,37 @@ namespace TechJobsConsole
             return rowValues.ToArray();
         }
     }
+
+
+    /*
+    // TODO: [those inputs and output aren't set]
+    public static List<Dictionary<string, string>> FindByValue(string column, string value)
+    {
+        //will search for a string within each of the columns
+        //will not contain duplicate jobs [ if a listing has position type 
+        //   "Web - Front End" and name "Front end web dev" then searching for "web" 
+        //   should not include the listing twice.]
+        //As with PrintJobs, you should write your code in a way that if a new column is 
+        //   added to the data, your code will automatically search the new column as well.
+        //You should not write code that calls FindByColumnAndValue once for each column. Rather, utilize loops and collection methods as you did above.
+        //You should, on the other hand, read and understand FindByColumnAndValue, since your code will look similar in some ways.
+        //You'll need to call FindByValue from somewhere in Main. We'll leave it up to you to find where. You might have noticed that when you try to search all columns using the app, a message is printed, so that is a good clue to help you find where to place this new method call.
+
+        LoadData();
+
+        List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+        foreach (Dictionary<string, string> row in AllJobs)
+        {
+            string aValue = row[column];
+
+            if (aValue.Contains(value))
+            {
+                jobs.Add(row);
+            }
+        }
+
+        return jobs;
+    }
+    */
 }
