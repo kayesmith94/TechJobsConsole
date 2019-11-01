@@ -47,7 +47,7 @@ namespace TechJobsConsole
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
             foreach (Dictionary<string, string> row in AllJobs)
-                //for every job (which is a dictionary called row)...
+            //for every job (which is a dictionary called row)...
             {
                 string aValue = row[column];
                 string aValueUpper = aValue.ToUpper();
@@ -151,26 +151,38 @@ namespace TechJobsConsole
             //virgin list for returning queried data
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
-            //dictionary with uppercase values
-            Dictionary<string, string> upperRow = new Dictionary<string, string>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
             //for every job (which is a dictionary called row)...
+            foreach (Dictionary<string, string> row in AllJobs)
             {
-                //for every value in that job...
-                foreach (KeyValuePair<string,string> keyval in row)
+                List<string> valuesList = new List<string>();
+                List<string> uppercaseValuesList = new List<string>();
+
+                foreach (string indValue in row.Values)
                 {
-                    upperRow.Add(keyval.Key, keyval.Value.ToUpper());
+                    string upindvalue = indValue.ToUpper();
+                    uppercaseValuesList.Add(upindvalue);
                 }
 
                 //if the value is in the job row values and the job is not already in the list
-                if ((upperRow.ContainsValue(value.ToUpper())) && (!(jobs.Contains(row))))
-                {
+                if (uppercaseValuesList.Contains(value.ToUpper()) & !(jobs.Contains(row)))
+                    {
                     jobs.Add(row);
-                }
-            }
+                    }
 
+                    /*                foreach (KeyValuePair<string, string> keyval in row)
+                                    {
+                                        if (keyval.Value.ToUpper().Contains(value.ToUpper()))
+                                        {
+                                            jobs.Add(row);
+                                            break;
+                                        }
+                                    }*/
+
+
+                }
             return jobs;
         }
     }
 }
+

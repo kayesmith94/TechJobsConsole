@@ -125,12 +125,18 @@ namespace TechJobsConsole
 
 
         static string UppercaseFirst(string str)
+            //uppercase first only
         {
             if (string.IsNullOrEmpty(str))
             {
                 return str;
             }
-            return char.ToUpper(str[0]) + str.Substring(1);
+
+            else
+            {
+                string lowerString = str.ToLower();
+                return char.ToUpper(str[0]) + lowerString.Substring(1);
+            }
         }
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
